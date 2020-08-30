@@ -1,0 +1,2 @@
+rootProject.name='All Things F1'
+include ':app'
