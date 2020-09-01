@@ -8,6 +8,10 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
+  <style name="AppTheme.CustomBarTheme">
+    <item name="navigationIcon">@mipmap/navigation_drawer_icon_foreground</item>
+  </style>
+
   <style name="AppTheme.Launcher">
     <item name="android:windowBackground">@drawable/launcher_screen_background</item>
   </style>
