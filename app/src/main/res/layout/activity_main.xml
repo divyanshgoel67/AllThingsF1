@@ -1,18 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".MainActivity">
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Hello World!"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context=".activity.MainActivity">
+
+      <LinearLayout
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:background="@color/colorPrimary"
+          android:id="@+id/main_toolbar">
+
+          <ImageView
+              android:layout_width="25dp"
+              android:layout_height="25dp"
+              android:layout_gravity="center_vertical"
+              android:layout_marginStart="15dp"
+              android:src="@mipmap/navigation_drawer_icon_foreground"
+              />
+
+          <ImageView
+              android:layout_width="60dp"
+              android:layout_height="60dp"
+              android:layout_gravity="center"
+              android:layout_marginStart="125dp"
+              android:src="@mipmap/main_logo_foreground" />
+
+
+      </LinearLayout>
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/main_recyclerview"
+          android:layout_below="@id/main_toolbar"/>
+
+  </RelativeLayout>
+
+  <com.google.android.material.navigation.NavigationView
+      android:id="@+id/navigation"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start|left"
+      app:menu="@menu/main_activity_drawer_menu"
+      android:background="@color/colorPrimary"
+      app:itemTextColor="@color/theme_red"
+      app:headerLayout="@layout/navigation_drawer_header"
+      />
+
+</androidx.drawerlayout.widget.DrawerLayout>
+

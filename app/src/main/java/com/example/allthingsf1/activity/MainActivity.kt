@@ -1,7 +1,8 @@
-package com.example.allthingsf1
+package com.example.allthingsf1.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.allthingsf1.R
 
 class MainActivity : AppCompatActivity() {
 
