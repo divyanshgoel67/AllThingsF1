@@ -10,6 +10,7 @@
 
   <style name="AppTheme.CustomBarTheme">
     <item name="navigationIcon">@mipmap/navigation_drawer_icon_foreground</item>
+    <item name="homeAsUpIndicator">@mipmap/back_arrow_icon_foreground</item>
   </style>
 
   <style name="AppTheme.Launcher">
