@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/race_results_fragment">
+
+    <fragment
+        android:id="@+id/race_results_fragment"
+        android:name="com.example.allthingsf1.fragment.RaceResultsFragment"
+        android:label="fragment_race_results"
+        tools:layout="@layout/fragment_race_results" >
+        <action
+            android:id="@+id/action_race_results_fragment_to_race_result_details_fragment"
+            app:destination="@id/race_result_details_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/race_result_details_fragment"
+        android:name="com.example.allthingsf1.fragment.RaceResultDetailsFragment"
+        android:label="fragment_race_result_details"
+        tools:layout="@layout/fragment_race_result_details" />
+    <fragment
+        android:id="@+id/qualifying_results_fragment"
+        android:name="com.example.allthingsf1.fragment.QualifyingResultsFragment"
+        android:label="fragment_qualifying_results"
+        tools:layout="@layout/fragment_qualifying_results" >
+        <action
+            android:id="@+id/action_qualifying_results_fragment_to_qualifying_result_details_fragment"
+            app:destination="@id/qualifying_result_details_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qualifying_result_details_fragment"
+        android:name="com.example.allthingsf1.fragment.QualifyingResultDetailsFragment"
+        android:label="fragment_qualifying_result_details"
+        tools:layout="@layout/fragment_qualifying_result_details" />
+    <fragment
+        android:id="@+id/standings_fragment"
+        android:name="com.example.allthingsf1.fragment.StandingsFragment"
+        android:label="fragment_standings"
+        tools:layout="@layout/fragment_standings" />
+    <fragment
+        android:id="@+id/race_schedule_fragment"
+        android:name="com.example.allthingsf1.fragment.RaceScheduleFragment"
+        android:label="fragment_race_schedule"
+        tools:layout="@layout/fragment_race_schedule" />
+    <fragment
+        android:id="@+id/seasons_list_fragment"
+        android:name="com.example.allthingsf1.fragment.SeasonsListFragment"
+        android:label="fragment_seasons_list"
+        tools:layout="@layout/fragment_seasons_list" />
+    <fragment
+        android:id="@+id/formula1_drivers_fragment"
+        android:name="com.example.allthingsf1.fragment.Formula1DriversFragment"
+        android:label="fragment_formula1_drivers"
+        tools:layout="@layout/fragment_formula1_drivers" />
+</navigation>

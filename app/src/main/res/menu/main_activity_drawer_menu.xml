@@ -2,8 +2,46 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Race Schedule" />
-    <item android:title="Driver Standings" />
-    <item android:title="Constructor Standings"  />
+    <group android:id="@+id/current_season_group"
+        android:menuCategory="container" >
+
+        <item
+            android:id="@+id/race_results_fragment"
+            android:title="Race Results"
+            />
+
+        <item
+            android:id="@+id/qualifying_results_fragment"
+            android:title="Qualifying Results" />
+
+        <item
+            android:id="@+id/standings_fragment"
+            android:title="Standings" />
+
+        <item
+            android:id="@+id/race_schedule_fragment"
+            android:title="Race Schedule" />
+
+    </group>
+
+    <group android:id="@+id/other_categories" android:menuCategory="container">
+
+        <item
+            android:id="@+id/seasons_list_fragment"
+            android:title="Seasons" />
+
+        <item
+            android:id="@+id/formula1_drivers_fragment"
+            android:title="Formula1 Drivers" />
+
+    </group>
+
+    <group android:id="@+id/logout" android:menuCategory="container">
+
+        <item
+            android:id="@+id/logout_menu_item"
+            android:title="Logout" />
+
+    </group>
 
 </menu>
