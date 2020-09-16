@@ -1,3 +1,4 @@
 rootProject.name='All Things F1'
 include ':app'
 include ':f1repository'
+include ':retrofit'
