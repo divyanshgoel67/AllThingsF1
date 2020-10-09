@@ -1,4 +1,4 @@
-package com.example.database.models
+package com.example.models.raceresult
 
 data class DriverPositionResultsModel(
     var position: Int,

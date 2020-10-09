@@ -1,7 +1,7 @@
 package com.example.retrofit.dagger
 
-import com.example.retrofit.SeasonListRemoteDataProvider
-import com.example.retrofit.SeasonRaceResultsRemoteDataProvider
+import com.example.retrofit.dataprovider.SeasonListRemoteDataProvider
+import com.example.retrofit.dataprovider.SeasonRaceResultsRemoteDataProvider
 import dagger.Component
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -10,6 +10,6 @@ import javax.inject.Singleton
 @Component(modules = [RetrofitModule::class])
 interface RetrofitComponent {
     fun getRetrofitClient(): Retrofit
-    fun injectSeasonRaceResultsProvider(raceResultsProvider: SeasonRaceResultsRemoteDataProvider)
-    fun injectSeasonsListProvider(seasonsListProvider: SeasonListRemoteDataProvider)
+    fun inject(raceResultsProvider: SeasonRaceResultsRemoteDataProvider)
+    fun inject(seasonsListProvider: SeasonListRemoteDataProvider)
 }

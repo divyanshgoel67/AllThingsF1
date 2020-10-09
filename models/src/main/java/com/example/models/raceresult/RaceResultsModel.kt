@@ -1,4 +1,4 @@
-package com.example.database.models
+package com.example.models.raceresult
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

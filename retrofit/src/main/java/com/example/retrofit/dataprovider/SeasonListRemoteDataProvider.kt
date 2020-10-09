@@ -1,7 +1,8 @@
-package com.example.retrofit
+package com.example.retrofit.dataprovider
 
 import com.example.models.seasons.SeasonsListWrapperModel
 import com.example.retrofit.apiinterface.SeasonsListRequest
+import com.example.retrofit.communicator.SeasonsListCommunicator
 import com.example.retrofit.dagger.DaggerRetrofitComponent
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +16,7 @@ class SeasonListRemoteDataProvider(var communicator: SeasonsListCommunicator) {
     @Inject lateinit var retrofitClient: Retrofit
 
     init {
-        DaggerRetrofitComponent.create().injectSeasonsListProvider(this)
+        DaggerRetrofitComponent.create().inject(this)
     }
 
     private var seasonsListApiService: SeasonsListRequest =

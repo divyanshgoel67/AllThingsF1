@@ -1,4 +1,4 @@
-package com.example.retrofit
+package com.example.retrofit.communicator
 
 import com.example.models.raceresult.SeasonRaceResultsWrapperModel
 
