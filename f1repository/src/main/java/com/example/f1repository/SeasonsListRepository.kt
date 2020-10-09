@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import com.example.database.F1Database
 import com.example.models.seasons.SeasonsDetailModel
 import com.example.models.seasons.SeasonsListWrapperModel
-import com.example.retrofit.SeasonListRemoteDataProvider
-import com.example.retrofit.SeasonsListCommunicator
+import com.example.retrofit.dataprovider.SeasonListRemoteDataProvider
+import com.example.retrofit.communicator.SeasonsListCommunicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
