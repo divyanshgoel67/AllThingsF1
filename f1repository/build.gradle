@@ -41,7 +41,7 @@ dependencies {
     // implementing retrofit module
     implementation project(":retrofit")
 
-    // implementing retrofit module
+    // implementing models module
     implementation project(":models")
 
     // dagger dependency
