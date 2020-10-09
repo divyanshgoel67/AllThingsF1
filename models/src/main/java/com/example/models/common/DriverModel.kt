@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class DriverModel(
     @SerializedName("driverId") @Expose var driverId: String,
+    @SerializedName("permanentNumber") @Expose var permanentNumber : Int,
     @SerializedName("givenName") @Expose var givenName: String,
     @SerializedName("familyName") @Expose var familyName: String,
     @SerializedName("nationality") @Expose var nationality: String
