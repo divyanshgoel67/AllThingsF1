@@ -1,15 +1,17 @@
 package com.example.f1repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.database.F1Database
-import com.example.database.models.DriverPositionResultsModel
-import com.example.database.models.RaceResultsModel
+import com.example.f1repository.dagger.DaggerDatabaseComponent
+import com.example.models.raceresult.DriverPositionResultsModel
+import com.example.models.raceresult.RaceResultsModel
 import com.example.models.raceresult.FinalGridPositionModel
 import com.example.models.raceresult.RaceDetailModel
 import com.example.models.raceresult.SeasonRaceResultsWrapperModel
-import com.example.retrofit.SeasonRaceResultsCommunicator
-import com.example.retrofit.SeasonRaceResultsRemoteDataProvider
+import com.example.retrofit.communicator.SeasonRaceResultsCommunicator
+import com.example.retrofit.dataprovider.SeasonRaceResultsRemoteDataProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asFlow
@@ -21,19 +23,55 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RaceResultsRepository @Inject constructor(
+class RaceResultsRepository(
     var season: String,
-    var database: F1Database
-) : SeasonRaceResultsCommunicator {
+    var context: Context
+) {
+
+    @Inject
+    lateinit var database: F1Database
+
+    var raceResultsCommunicator = object : SeasonRaceResultsCommunicator {
+        override fun onSeasonRaceResultsSuccessful(result: SeasonRaceResultsWrapperModel?) {
+            CoroutineScope(Dispatchers.IO).launch {
+                var seasonRaceResultsArray: List<DriverPositionResultsModel> = ArrayList()
+                result?.data?.raceTable?.races?.asFlow()
+                    ?.map { it -> convertRaceResultsData(it) }
+                    ?.flowOn(Dispatchers.Default)
+                    ?.collect { it -> raceResultsDao.insertSeasonRaceDetails(it) }
+            }
+        }
+
+        override fun onSeasonRaceResultsFailed(reason: String) {
+            seasonRaceResultsFailedLiveData.value = reason
+        }
+
+        override fun onRaceDataSuccessful() {
+            TODO("Not yet implemented")
+        }
+
+        override fun onRaceDataFailed() {
+            TODO("Not yet implemented")
+        }
+
+    }
+
+    init {
+        DaggerDatabaseComponent
+            .builder()
+            .context(context)
+            .build()
+            .inject(this)
+    }
 
     private var raceResultsDao = database.raceResultsDao()
 
-    var remoteDataProvider: SeasonRaceResultsRemoteDataProvider =
-        SeasonRaceResultsRemoteDataProvider(this)
+    private var remoteDataProvider: SeasonRaceResultsRemoteDataProvider =
+        SeasonRaceResultsRemoteDataProvider(raceResultsCommunicator)
 
-    var seasonRaceResultsFailedLiveData = MutableLiveData<String>()
+    private var seasonRaceResultsFailedLiveData = MutableLiveData<String>()
 
-    suspend fun getCurrentSeasonRaceResults(): LiveData<List<RaceResultsModel>> {
+    fun getCurrentSeasonRaceResults(): LiveData<List<RaceResultsModel>> {
         CoroutineScope(Dispatchers.Default).launch {
             if (checkIfSeasonDataIsPresent()) {
                 remoteDataProvider.getSeasonRaceResultsFromRemoteStorage(season)
@@ -86,15 +124,16 @@ class RaceResultsRepository @Inject constructor(
     }
 
     private fun convertDriverDataFromFlow(result: FinalGridPositionModel): DriverPositionResultsModel {
-        var finalResult = DriverPositionResultsModel(
-            result.position,
-            result.driver.permanentNumber,
-            result.driver.nationality,
-            result.constructor.name,
-            result.status,
-            result.time.time,
-            result.fastestLap.time.time
-        )
+        var finalResult =
+            DriverPositionResultsModel(
+                result.position,
+                result.driver.permanentNumber,
+                result.driver.nationality,
+                result.constructor.name,
+                result.status,
+                result.time.time,
+                result.fastestLap.time.time
+            )
 
         finalResult.driver = "${result.driver.givenName} ${result.driver.familyName}"
         finalResult.avgSpeed = "${result.averageSpeed.speed} ${result.averageSpeed.units}"
@@ -102,28 +141,28 @@ class RaceResultsRepository @Inject constructor(
         return finalResult
     }
 
-    override fun onSeasonRaceResultsSuccessful(result: SeasonRaceResultsWrapperModel?) {
-
-        CoroutineScope(Dispatchers.IO).launch {
-            var seasonRaceResultsArray: List<DriverPositionResultsModel> = ArrayList()
-            result?.data?.raceTable?.races?.asFlow()
-                ?.map { it -> convertRaceResultsData(it) }
-                ?.flowOn(Dispatchers.Default)
-                ?.collect { it -> raceResultsDao.insertSeasonRaceDetails(it) }
-        }
-
-    }
-
-    override fun onSeasonRaceResultsFailed(reason: String) {
-        seasonRaceResultsFailedLiveData.value = reason
-    }
-
-    override fun onRaceDataSuccessful() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onRaceDataFailed() {
-        TODO("Not yet implemented")
-    }
+//    override fun onSeasonRaceResultsSuccessful(result: SeasonRaceResultsWrapperModel?) {
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            var seasonRaceResultsArray: List<DriverPositionResultsModel> = ArrayList()
+//            result?.data?.raceTable?.races?.asFlow()
+//                ?.map { it -> convertRaceResultsData(it) }
+//                ?.flowOn(Dispatchers.Default)
+//                ?.collect { it -> raceResultsDao.insertSeasonRaceDetails(it) }
+//        }
+//
+//    }
+//
+//    override fun onSeasonRaceResultsFailed(reason: String) {
+//        seasonRaceResultsFailedLiveData.value = reason
+//    }
+//
+//    override fun onRaceDataSuccessful() {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun onRaceDataFailed() {
+//        TODO("Not yet implemented")
+//    }
 
 }
