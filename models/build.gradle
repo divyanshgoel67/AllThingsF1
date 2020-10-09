@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -36,4 +37,14 @@ dependencies {
 
     // Gson dependency
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // room dependency
+    def room_version = "2.2.5"
+
+    api "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // Kotlin Extensions and Coroutines support for Room
+    api "androidx.room:room-ktx:$room_version"
+
 }
