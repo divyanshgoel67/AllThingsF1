@@ -1,580 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:padding="5dp">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/race_results_motion_layout"
+<data>
+
+    <variable
+        name="raceResult"
+        type="com.example.models.raceresult.RaceResultsModel"/>
+
+    <variable
+        name="emptyString"
+        type="String"
+        />
+
+    <variable
+        name="onClickListener"
+        type="com.example.allthingsf1.OnExpandButtonClickListener" />
+
+</data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
         android:background="@drawable/race_results_background_drawable"
-        android:elevation="5dp"
-        app:cardCornerRadius="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        >
 
-        <RelativeLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/race_results_motion_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/race_results_motion_layout"
-            app:layout_constraintStart_toStartOf="@id/race_results_motion_layout"
-            app:layout_constraintTop_toTopOf="@id/race_results_motion_layout">
+            app:cardCornerRadius="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutDescription="@xml/motion_scene_race_results_fragment"
+            >
 
             <ImageView
                 android:id="@+id/change_results_detail"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="17dp"
                 android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> onClickListener.onClick()}"
                 android:padding="10dp"
-                android:src="@mipmap/add_icon_foreground"
+                android:src="@mipmap/expand_arrow_foreground"
+                app:layout_constraintTop_toTopOf="@id/header_layout"
+                app:layout_constraintBottom_toBottomOf="@id/header_layout"
+                app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
                 />
 
-            <TextView
-                android:id="@+id/grand_prix"
+            <LinearLayout
+                android:id="@+id/header_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="7dp"
-                android:text="Australian Grand Prix"
-                android:textColor="@color/theme_red"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_marginLeft="6dp"
+                app:layout_constraintLeft_toRightOf="@id/change_results_detail"
+                app:layout_constraintTop_toTopOf="@id/race_results_motion_layout">
 
-            <TextView
-                android:id="@+id/circuit_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/grand_prix"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="9dp"
-                android:layout_marginEnd="20dp"
-                android:text="Albert Park Grand Prix Circuit"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/first_divider"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_below="@id/circuit_name"
-                android:layout_marginTop="7dp"
-                android:background="@android:color/white" />
-
-            <LinearLayout
-                android:id="@+id/p1_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/first_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp">
+                <ImageView
+                    android:id="@+id/country_flag"
+                    android:layout_width="65dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
 
                 <TextView
-                    android:id="@+id/number_1"
+                    android:id="@+id/grand_prix"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1."
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/orbitron"
+                    android:text="@{raceResult.country}"
                     android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p1_driver_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Lewis Hamilton"
-                    android:textColor="@android:color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p1_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="1:42:34:345"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/second_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p1_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red" />
+            <ImageView
+                android:id="@+id/completed_flag"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="@id/header_layout"
+                app:layout_constraintBottom_toBottomOf="@id/header_layout"
+                app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/race_flag_foreground"
+                />
 
-            <LinearLayout
-                android:id="@+id/p2_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/second_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp">
 
                 <TextView
-                    android:id="@+id/number_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:id="@+id/first_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintTop_toBottomOf="@id/header_layout"
+                    app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+                    />
 
-                <TextView
-                    android:id="@+id/p2_driver_name"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/p1_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Valtteri Bottas"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/first_divider"
+                    app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+                    >
+
+                    <TextView
+                        android:id="@+id/number_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1."
+                        android:textColor="@color/theme_red"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/p1_driver_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@{raceResult.driverPositions.size() > 0 ? raceResult.driverPositions.get(0).driver : emptyString}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/p1_race_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:text="@{raceResult.driverPositions.size() > 0 ? raceResult.driverPositions.get(0).raceTime : emptyString}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/p2_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+8.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:id="@+id/second_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@color/theme_red"
+                    app:layout_constraintTop_toBottomOf="@id/p1_container"
+                    app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+                    />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/third_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p2_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red" />
-
-            <LinearLayout
-                android:id="@+id/p3_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/third_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp">
-
-                <TextView
-                    android:id="@+id/number_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p3_driver_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p3_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/fourth_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p3_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/p4_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/fourth_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/number_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p4_driver_name"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/p2_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/second_divider"
+                    app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+                    >
+
+                    <TextView
+                        android:id="@+id/number_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2."
+                        android:textColor="@color/theme_red"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/p2_driver_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@{raceResult.driverPositions.size() > 1 ? raceResult.driverPositions.get(1).driver : emptyString}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/p2_race_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:text="@{raceResult.driverPositions.size() > 1 ? raceResult.driverPositions.get(1).raceTime : emptyString}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/p4_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:id="@+id/third_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:background="@color/theme_red"
+                    app:layout_constraintTop_toBottomOf="@id/p2_container"
+                    app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+                    />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/fifth_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p4_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/p5_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/fifth_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/number_5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p5_driver_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p5_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/sixth_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p5_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/p6_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/sixth_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/number_6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p6_driver_name"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/p3_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="7dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/third_divider"
+                    app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+                    >
 
-                <TextView
-                    android:id="@+id/p6_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/number_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3."
+                        android:textColor="@color/theme_red"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/p3_driver_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:text="@{raceResult.driverPositions.size() > 2 ? raceResult.driverPositions.get(2).driver : emptyString}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/seventh_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p6_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red"
-                android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/p3_race_time"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:gravity="right"
+                        android:text="@{raceResult.driverPositions.size() > 2 ? raceResult.driverPositions.get(2).raceTime : emptyString}"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/p7_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/seventh_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone">
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/number_7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
 
-                <TextView
-                    android:id="@+id/p7_driver_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/p7_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+</layout>
 
-            </LinearLayout>
 
-            <TextView
-                android:id="@+id/eighth_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p7_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/p8_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/eighth_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/number_8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p8_driver_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p8_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/ninth_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p8_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/p9_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ninth_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/number_9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p9_driver_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p9_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tenth_divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/p9_container"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:background="@color/theme_red"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/p10_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tenth_divider"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="5dp"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/number_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="10."
-                    android:textColor="@color/theme_red"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p10_driver_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="Max Verstappen"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/p10_race_time"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:gravity="right"
-                    android:text="+1.200s"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-    </androidx.constraintlayout.motion.widget.MotionLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
