@@ -5,50 +5,229 @@
     <Transition
         app:constraintSetStart="@id/contracted_view"
         app:constraintSetEnd="@id/expanded_view"
-        app:duration="300"
+        app:duration="250"
         app:motionInterpolator="linear">
+    </Transition>
 
-        <OnClick app:clickAction="toggle" app:targetId="@id/change_results_detail"/>
-
+    <Transition
+        app:constraintSetStart="@id/expanded_view"
+        app:constraintSetEnd="@id/contracted_view"
+        app:duration="250"
+        app:motionInterpolator="linear">
     </Transition>
 
     <ConstraintSet
         android:id="@+id/contracted_view">
-        <Constraint android:id="@+id/fourth_divider" android:visibility="gone"/>
-        <Constraint android:id="@+id/p4_container" android:visibility="gone"/>
-        <Constraint android:id="@+id/fifth_divider" android:visibility="gone"/>
-        <Constraint android:id="@+id/p5_container" android:visibility="gone"/>
-        <Constraint android:id="@+id/sixth_divider_divider" android:visibility="gone"/>
-        <Constraint android:id="@+id/p6_container" android:visibility="gone"/>
-        <Constraint android:id="@+id/seventh_divider_divider" android:visibility="gone"/>
-        <Constraint android:id="@+id/p7_container" android:visibility="gone"/>
-        <Constraint android:id="@+id/eighth_divider_divider" android:visibility="gone"/>
-        <Constraint android:id="@+id/p8_container" android:visibility="gone"/>
-        <Constraint android:id="@+id/ninth_divider_divider" android:visibility="gone"/>
-        <Constraint android:id="@+id/p9_container" android:visibility="gone"/>
-        <Constraint android:id="@+id/tenth_divider" android:visibility="gone"/>
-        <Constraint android:id="@+id/p10_container" android:visibility="gone"/>
-        <Constraint android:id="@+id/change_results_detail" android:rotation="0"/>
+
+        <Constraint
+            android:id="@+id/change_results_detail"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:src="@mipmap/expand_arrow_foreground"
+            app:layout_constraintTop_toTopOf="@id/header_layout"
+            app:layout_constraintBottom_toBottomOf="@id/header_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:rotation="-90"
+            />
+
+        <Constraint
+            android:id="@+id/first_divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/header_layout"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="gone"
+            />
+
+        <Constraint
+            android:id="@+id/p1_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintTop_toBottomOf="@id/first_divider"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="gone"
+            />
+
+        <Constraint
+            android:id="@+id/second_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/theme_red"
+            app:layout_constraintTop_toBottomOf="@id/p1_container"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="gone"
+            />
+
+        <Constraint
+            android:id="@+id/p2_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintTop_toBottomOf="@id/second_divider"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="gone"
+            />
+
+        <Constraint
+            android:id="@+id/third_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/theme_red"
+            app:layout_constraintTop_toBottomOf="@id/p2_container"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="gone"
+            />
+
+        <Constraint
+            android:id="@+id/p3_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:paddingBottom="5dp"
+            app:layout_constraintTop_toBottomOf="@id/third_divider"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="gone"
+            />
+
     </ConstraintSet>
 
     <ConstraintSet
         android:id="@+id/expanded_view">
-        <Constraint android:id="@+id/fourth_divider" android:visibility="visible"/>
-        <Constraint android:id="@+id/p4_container" android:visibility="visible"/>
-        <Constraint android:id="@+id/fifth_divider" android:visibility="visible"/>
-        <Constraint android:id="@+id/p5_container" android:visibility="visible"/>
-        <Constraint android:id="@+id/sixth_divider_divider" android:visibility="visible"/>
-        <Constraint android:id="@+id/p6_container" android:visibility="visible"/>
-        <Constraint android:id="@+id/seventh_divider_divider" android:visibility="visible"/>
-        <Constraint android:id="@+id/p7_container" android:visibility="visible"/>
-        <Constraint android:id="@+id/eighth_divider_divider" android:visibility="visible"/>
-        <Constraint android:id="@+id/p8_container" android:visibility="visible"/>
-        <Constraint android:id="@+id/ninth_divider_divider" android:visibility="visible"/>
-        <Constraint android:id="@+id/p9_container" android:visibility="visible"/>
-        <Constraint android:id="@+id/tenth_divider" android:visibility="visible"/>
-        <Constraint android:id="@+id/p10_container" android:visibility="visible"/>
-        <Constraint android:id="@+id/compress_results" android:visibility="visible"/>
-        <Constraint android:id="@+id/change_results_detail" android:rotation="45"/>
+
+        <Constraint
+            android:id="@+id/change_results_detail"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:src="@mipmap/expand_arrow_foreground"
+            app:layout_constraintTop_toTopOf="@id/header_layout"
+            app:layout_constraintBottom_toBottomOf="@id/header_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:rotation="0"
+            />
+
+        <Constraint
+            android:id="@+id/first_divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/header_layout"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="visible"
+            />
+
+        <Constraint
+            android:id="@+id/change_results_detail"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:src="@mipmap/expand_arrow_foreground"
+            android:rotation="0"/>
+
+        <Constraint
+            android:id="@+id/first_divider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="7dp"
+            android:background="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/header_layout"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            android:visibility="visible"
+            />
+
+        <Constraint
+            android:id="@+id/p1_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintTop_toBottomOf="@id/first_divider"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            />
+
+        <Constraint
+            android:id="@+id/second_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/theme_red"
+            app:layout_constraintTop_toBottomOf="@id/p1_container"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            />
+
+        <Constraint
+            android:id="@+id/p2_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintTop_toBottomOf="@id/second_divider"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            />
+
+        <Constraint
+            android:id="@+id/third_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/theme_red"
+            app:layout_constraintTop_toBottomOf="@id/p2_container"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            />
+
+        <Constraint
+            android:id="@+id/p3_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
+            android:paddingBottom="5dp"
+            app:layout_constraintTop_toBottomOf="@id/third_divider"
+            app:layout_constraintRight_toRightOf="@id/race_results_motion_layout"
+            app:layout_constraintLeft_toLeftOf="@id/race_results_motion_layout"
+            />
+
+
     </ConstraintSet>
 
 </MotionScene>
