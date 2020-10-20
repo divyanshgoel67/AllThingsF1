@@ -1,11 +1,17 @@
 package com.example.database
 
-import android.content.Context
-import androidx.room.*
-import com.example.database.models.DriverPositionResultsModel
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.models.raceresult.RaceResultsModel
+import com.example.models.raceschedule.ScheduleEntityModel
+import com.example.models.seasons.SeasonsDetailModel
 import javax.inject.Singleton
 
-@Database(entities = [DriverPositionResultsModel::class], version = 1)
+@Database(
+    entities = [RaceResultsModel::class, SeasonsDetailModel::class, ScheduleEntityModel::class],
+    version = 3
+)
 @Singleton
 @TypeConverters(Converter::class)
 abstract class F1Database : RoomDatabase() {
@@ -14,20 +20,5 @@ abstract class F1Database : RoomDatabase() {
 
     abstract fun seasonsListDao() : SeasonsListDao
 
-    companion object {
-
-        @Volatile
-        private lateinit var instance : F1Database
-
-        @Synchronized fun getInstance (context : Context) : F1Database{
-            if (!::instance.isInitialized || instance == null) {
-                instance = Room.databaseBuilder(context.applicationContext, F1Database::class.java,"notes_database")
-                    .fallbackToDestructiveMigration()
-                    .build()
-            }
-            return  instance
-
-        }
-
-    }
+    abstract fun scheduleDao(): RaceScheduleDao
 }

@@ -1,10 +1,9 @@
 package com.example.database
 
 import androidx.room.TypeConverter
-import com.example.database.models.DriverPositionResultsModel
+import com.example.models.raceresult.DriverPositionResultsModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-
 
 class Converter {
 
