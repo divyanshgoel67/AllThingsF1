@@ -14,8 +14,7 @@ data class FinalGridPositionModel(
     @SerializedName("laps") @Expose var laps: Int,
     @SerializedName("status") @Expose var status: String,
     @SerializedName("Time") @Expose var time: TimeModel,
-    @SerializedName("FastestLap") @Expose var fastestLap: FastestLapModel,
-    @SerializedName("AverageSpeed") @Expose var averageSpeed: AverageSpeedModel
+    @SerializedName("FastestLap") @Expose var fastestLap: FastestLapModel?
 )
 
 data class TimeModel(
@@ -24,7 +23,8 @@ data class TimeModel(
 
 data class FastestLapModel(
     @SerializedName("lap") @Expose var lap: Int,
-    @SerializedName("Time") @Expose var time: TimeModel
+    @SerializedName("Time") @Expose var time: TimeModel,
+    @SerializedName("AverageSpeed") @Expose var averageSpeed: AverageSpeedModel?
 
 )
 

@@ -9,6 +9,7 @@ class RaceResultsModel(
     var raceNumber: Int,
     var raceName: String,
     var trackName: String,
+    var country : String,
     var driverPositions : ArrayList<DriverPositionResultsModel>
 ) {
     @PrimaryKey(autoGenerate = true)

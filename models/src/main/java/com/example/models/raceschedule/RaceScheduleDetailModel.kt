@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class RaceScheduleDetailModel(
-    @SerializedName("season") @Expose var season: Int,
+    @SerializedName("season") @Expose var season: String,
     @SerializedName("round") @Expose var round: Int,
     @SerializedName("raceName") @Expose var raceName: String,
     @SerializedName("Circuit") @Expose var circuit: CircuitModel,

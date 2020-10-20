@@ -11,6 +11,4 @@ class RaceDetailModel(
     @SerializedName("Circuit") @Expose var circuit: CircuitModel,
     @SerializedName("date") @Expose var date: String,
     @SerializedName("Results") @Expose var results: List<FinalGridPositionModel>
-
-
 )
