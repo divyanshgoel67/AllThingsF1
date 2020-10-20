@@ -6,5 +6,5 @@ interface SeasonsListCommunicator {
 
     fun onSeasonsListResponseSuccessful(result : SeasonsListWrapperModel?)
 
-    fun onSeasonsListResponseFailed()
+    fun onSeasonsListResponseFailed(message: String)
 }
