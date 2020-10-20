@@ -37,9 +37,16 @@ dependencies {
 
     implementation project(":models")
 
+    implementation project(":dagger")
+
     // dagger dependency
     implementation 'com.google.dagger:dagger:2.29.1'
     kapt 'com.google.dagger:dagger-compiler:2.29.1'
+
+    def room_version = "2.2.5"
+
+    api "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // Gson dependency
     implementation 'com.google.code.gson:gson:2.8.6'

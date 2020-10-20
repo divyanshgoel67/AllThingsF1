@@ -2,7 +2,7 @@ package com.example.database
 
 import androidx.room.Dao
 import androidx.room.Insert
-import com.example.database.models.DriverPositionResultsModel
+import com.example.models.raceresult.DriverPositionResultsModel
 
 @Dao
 interface RaceInfoDao {
