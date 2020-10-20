@@ -1,29 +1,28 @@
 package com.example.f1repository.dagger
 
-import android.content.Context
 import com.example.database.F1Database
-import com.example.database.dagger.DatabaseModule
+import com.example.database.RaceResultsDao
+import com.example.database.SeasonsListDao
 import com.example.f1repository.RaceResultsRepository
-import dagger.BindsInstance
+import com.example.f1repository.RaceScheduleRepository
+import com.example.f1repository.SeasonsListRepository
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [DatabaseModule::class])
 @Singleton
+@Component(modules = [DatabaseModule::class])
 interface DatabaseComponent {
 
-    fun getDatabaseObject() : F1Database
+    fun getDatabase() : F1Database
 
-    fun inject(raceResultsRepository: RaceResultsRepository)
+    fun getRaceResultsDao() : RaceResultsDao
 
-    @Component.Builder
-    interface Builder {
+    fun getSeasonsListDao() : SeasonsListDao
 
-        @BindsInstance
-        fun context(context : Context) : Builder
+    fun inject(repository : RaceResultsRepository)
 
-        fun build() : DatabaseComponent
+    fun inject(repository : SeasonsListRepository)
 
-    }
+    fun inject(repository : RaceScheduleRepository)
 
 }
