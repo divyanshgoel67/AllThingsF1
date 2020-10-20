@@ -7,20 +7,12 @@
 
         <item
             android:id="@+id/race_results_fragment"
-            android:title="Race Results"
+            android:title="Races"
             />
-
-        <item
-            android:id="@+id/qualifying_results_fragment"
-            android:title="Qualifying Results" />
 
         <item
             android:id="@+id/standings_fragment"
             android:title="Standings" />
-
-        <item
-            android:id="@+id/race_schedule_fragment"
-            android:title="Race Schedule" />
 
     </group>
 
