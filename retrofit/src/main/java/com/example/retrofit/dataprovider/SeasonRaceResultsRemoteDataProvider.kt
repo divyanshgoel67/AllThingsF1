@@ -1,9 +1,9 @@
 package com.example.retrofit.dataprovider
 
 import com.example.models.raceresult.SeasonRaceResultsWrapperModel
+import com.example.retrofit.RetrofitManager
 import com.example.retrofit.apiinterface.RaceResultsRequest
 import com.example.retrofit.communicator.SeasonRaceResultsCommunicator
-import com.example.retrofit.dagger.DaggerRetrofitComponent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,15 +17,15 @@ class SeasonRaceResultsRemoteDataProvider(
     @Inject lateinit var retrofitClient : Retrofit
 
     init {
-        DaggerRetrofitComponent.create().inject(this)
+        RetrofitManager.instance.getRetrofitComponent().inject(this)
     }
 
     private var raceResultsApiService: RaceResultsRequest = retrofitClient.create(RaceResultsRequest::class.java)
 
-    suspend fun getSeasonRaceResultsFromRemoteStorage(season : String) {
+    fun getSeasonRaceResultsFromRemoteStorage(season: String) {
         raceResultsApiService.getSeasonRaceResults(season)?.enqueue(object : Callback<SeasonRaceResultsWrapperModel> {
             override fun onFailure(call: Call<SeasonRaceResultsWrapperModel>, t: Throwable) {
-                communicator.onSeasonRaceResultsFailed(t.localizedMessage)
+                communicator.onSeasonRaceResultsFailed(t.localizedMessage!!)
             }
 
             override fun onResponse(
