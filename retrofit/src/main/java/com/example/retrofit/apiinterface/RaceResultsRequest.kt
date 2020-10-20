@@ -7,6 +7,6 @@ import retrofit2.http.Path
 
 interface RaceResultsRequest {
 
-    @GET("{season}/results.json")
-    suspend fun getSeasonRaceResults(@Path ("season") season : String): Call<SeasonRaceResultsWrapperModel>?
+    @GET("{season}/results.json?limit=500")
+    fun getSeasonRaceResults(@Path ("season") season : String): Call<SeasonRaceResultsWrapperModel>?
 }

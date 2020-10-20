@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface SeasonsListRequest {
 
     @GET("seasons.json?limit=150")
-    suspend fun getAllSeasons() : Call<SeasonsListWrapperModel>?
+    fun getAllSeasons() : Call<SeasonsListWrapperModel>?
 }
